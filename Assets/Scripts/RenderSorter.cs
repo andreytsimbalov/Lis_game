@@ -5,7 +5,7 @@ using UnityEngine;
 public class RenderSorter : MonoBehaviour
 {
     [SerializeField]
-    private int sortOrdBase = 5000;
+    private int sortOrdBase = 500;
     [SerializeField]
     public float offset = 0f;
     private Renderer rend;
@@ -17,6 +17,6 @@ public class RenderSorter : MonoBehaviour
 
     private void LateUpdate()
     {
-        rend.sortingOrder = (int)(sortOrdBase - transform.position.y- offset);
+        rend.sortingOrder = (int)((sortOrdBase - transform.position.y- offset)*10);
     }
 }

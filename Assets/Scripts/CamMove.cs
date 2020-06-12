@@ -11,6 +11,10 @@ public class CamMove : MonoBehaviour {
 	private float ymax = 1000f;
 	private float ymin = -1000f;
 	static private float speed = 5f;
+	private float timeoffset;
+	public float maxtimeoffset = 2;
+	public float offsetalltime = 1;
+
 
 	private float dumping = speed;
 	private Vector3 last_pos;// = new Vector3(0,0,0);
@@ -18,6 +22,8 @@ public class CamMove : MonoBehaviour {
 	
 	private void Start()
 	{
+		//offsetalltime = 1;
+		timeoffset = maxtimeoffset;
 		last_pos = new Vector3(player.transform.position.x, player.transform.position.y, -10f);
 		xmax = player.transform.position.x;
 		xmin = player.transform.position.x;
@@ -28,6 +34,17 @@ public class CamMove : MonoBehaviour {
 
 	void Update () {
 
+		if (timeoffset < 0)
+		{
+			offsetalltime = -offsetalltime;
+			timeoffset = maxtimeoffset;
+		}
+		else
+		{
+			timeoffset -= Time.deltaTime;
+		}
+
+		Vector2 offsetVector = new Vector2(0, offsetalltime);
 		Vector3 new_pos = new Vector3(player.transform.position.x, player.transform.position.y, -10f);
 		if (new_pos.x > xmax) new_pos.x = xmax;
 		if (new_pos.x < xmin) new_pos.x = xmin;
@@ -61,7 +78,7 @@ public class CamMove : MonoBehaviour {
 		}
 
 		//new_pos = Vector3.Lerp(last_pos, new_pos, 0.5f);
-
+		//new_pos = new Vector3(new_pos.x+offsetVector.x, new_pos.y+offsetVector.y, new_pos.z);
 		transform.position = new_pos;
 		last_pos = new_pos;
 

@@ -85,13 +85,13 @@ public class PlayerController1 : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		Debug.Log(coll.GetComponent<Transform>().localScale.x);
+		//Debug.Log(coll.GetComponent<Transform>().localScale.x);
 		_objInCollider.Add(coll);
 		if (coll.tag == "talk_trigger")
 		{
 			count_tolk_pers++;
 			if (count_tolk_pers == 1) CanvasActiv();
-			Debug.Log(count_tolk_pers);
+			//Debug.Log(count_tolk_pers);
 		}
 	}
 
